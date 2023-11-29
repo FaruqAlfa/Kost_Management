@@ -21,11 +21,9 @@ class LoginLogoutController extends Controller
             $user = Auth::user();
 
             if ($user->role == 'admin') {
-                // return redirect()->route('admin.dashboard');
-                return view('admin.dashboardAdmin');
+                return redirect()->route('admin.dashboard');
             } elseif ($user->role == 'user') {
-                // return redirect()->route('user.dashboard');
-                return view('anakKos.dashboardAnakKos');
+                return redirect()->route('user.dashboard');
             }
         }
 

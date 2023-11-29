@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\LoginLogoutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,5 +19,18 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
+// routes/web.php
 
-Route::get('/login', [App\Http\Controllers\AuthController::class, 'login'])->name('login'); 
+
+Route::get('/login', [LoginLogoutController::class, 'showLoginForm'])->name('login');
+Route::post('/loginForm', [LoginLogoutController::class, 'login'])->name('loginForm');
+
+
+Route::middleware('admin')->group(function () {
+    Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+});
+
+
+Route::middleware('user')->group(function () {
+    Route::get('/user/dashboard', [UserController::class, 'dashboard'])->name('user.dashboard');
+});
